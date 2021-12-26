@@ -5259,8 +5259,12 @@ __webpack_require__(/*! ./components/Example.jsx */ "./resources/js/components/E
 /*!***********************************!*\
   !*** ./resources/js/bootstrap.js ***!
   \***********************************/
-/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _modules_helper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/helper */ "./resources/js/modules/helper.js");
+/* harmony import */ var _modules_api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/api */ "./resources/js/modules/api.js");
 window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 
 try {
@@ -5289,6 +5293,14 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     forceTLS: true
 // });
 
+
+window.helper = _modules_helper__WEBPACK_IMPORTED_MODULE_0__["default"];
+
+_modules_api__WEBPACK_IMPORTED_MODULE_1__["default"].init({
+  url: '/api/'
+});
+window.api = _modules_api__WEBPACK_IMPORTED_MODULE_1__["default"];
+
 /***/ }),
 
 /***/ "./resources/js/components/Example.jsx":
@@ -5311,6 +5323,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function Example() {
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    window.api.post('test', {
+      one: 'a'
+    }).then(function (responce) {
+      console.log(responce);
+      console.log('success');
+    })["catch"](function (errors) {
+      console.log(errors);
+      console.log('error');
+    });
+  });
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
     className: "container",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
@@ -5337,6 +5360,141 @@ function Example() {
 if (document.getElementById('app')) {
   react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(Example, {}), document.getElementById('app'));
 }
+
+/***/ }),
+
+/***/ "./resources/js/modules/api.js":
+/*!*************************************!*\
+  !*** ./resources/js/modules/api.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ api)
+/* harmony export */ });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var api = /*#__PURE__*/function () {
+  function api() {
+    _classCallCheck(this, api);
+
+    _defineProperty(this, "url", '');
+  }
+
+  _createClass(api, null, [{
+    key: "init",
+    value: function init(data) {
+      api.url = data.url;
+    }
+  }, {
+    key: "query",
+    value: function query(data) {
+      var url = data.absolute_url ? api.url : api.url + data.url;
+      var method = data.type ? data.type : 'get';
+      var data = data.data ? data.data : [];
+      var headers = data.headers ? data.headers : {};
+
+      function error_handing(data) {
+        if (data.response) data = data.response;
+
+        if (data.data.errors) {
+          return data.data.errors;
+        } else {
+          console.log('unprocessed error');
+          console.log(data.data);
+          return {};
+        }
+      }
+
+      return new Promise(function (resolve, reject) {
+        window.axios({
+          method: method,
+          url: url,
+          data: data,
+          headers: headers
+        }).then(function (data) {
+          if (data.data.type && data.data.type == 'success') {
+            resolve(data.data);
+          } else {
+            reject(error_handing(data));
+          }
+        })["catch"](function (error) {
+          reject(error_handing(error));
+        });
+      });
+    }
+  }, {
+    key: "post",
+    value: function post(url, data) {
+      var headers = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
+      return api.query({
+        url: url,
+        data: data,
+        headers: headers,
+        type: 'post'
+      });
+    }
+  }, {
+    key: "get",
+    value: function get(url, data) {
+      var headers = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
+      return api.query({
+        url: url,
+        data: data,
+        headers: headers,
+        type: 'get'
+      });
+    }
+  }]);
+
+  return api;
+}();
+
+
+
+/***/ }),
+
+/***/ "./resources/js/modules/helper.js":
+/*!****************************************!*\
+  !*** ./resources/js/modules/helper.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ helper)
+/* harmony export */ });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+var helper = /*#__PURE__*/function () {
+  function helper() {
+    _classCallCheck(this, helper);
+  }
+
+  _createClass(helper, null, [{
+    key: "isset",
+    value: function isset(e) {
+      return e !== undefined;
+    }
+  }]);
+
+  return helper;
+}();
+
+
 
 /***/ }),
 

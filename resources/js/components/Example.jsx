@@ -1,7 +1,20 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import ReactDOM from 'react-dom';
 
 function Example() {
+
+    useEffect(() => {
+        window.api.post('test', {one: 'a'})
+        .then(responce=>{
+            console.log(responce);
+            console.log('success');
+        })
+        .catch(errors=>{
+            console.log(errors);
+            console.log('error');
+        });
+    })
+
     return (
         <div className="container">
             <div className="row justify-content-center">
