@@ -14,19 +14,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-
-use App\Services\Soft\Http;
-
-Route::post('/test', function (Request $request){
-    $result = $request->all();
-    $result['test'] = true;
-    $result['session'] = session('key', 'a');
-
-    session(['key' => session('key', 0)+1]);
-    //$result['session'] = session('key', 0);
-    return Http::success($result);
-});
+require base_path('routes/react/index.php');

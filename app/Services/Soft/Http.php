@@ -1,6 +1,8 @@
 <?php
 namespace App\Services\Soft;
 
+use Barryvdh\Debugbar\Facades\Debugbar;
+
 class Http{
     static public $code = 200;
     static public $errors = [];
@@ -8,24 +10,42 @@ class Http{
     static public $headers = [];
 
 
-    static public function responce(){
+    static public function response(){
         self::$body['errors'] = self::$errors;
-        return response(self::$body, self::$code)
+
+
+        if(isset(request()->all()['api']) && request()->all()['api']){
+            return response(self::$body, self::$code)
+                ->withHeaders(self::$headers);
+        }
+        else{
+
+            \JavaScript::put(
+                self::$body
+            );
+
+            \Debugbar::info(
+                self::$body
+            );
+
+            return response()
+            ->view('react', [], self::$code)
             ->withHeaders(self::$headers);
+        }
     }
 
-    static public function error($errors, $code = 500){
+    static public function error($errors = [], $code = 500){
         self::$errors = array_merge($errors, self::$errors);
         self::$code = $code;
         self::$body['type'] = 'error';
-        return self::responce();
+        return self::response();
     }
 
 
-    static public function success($data){
+    static public function success($data = []){
         self::$body = array_merge($data, self::$body);
         self::$code = 200;
         self::$body['type'] = 'success';
-        return self::responce();
+        return self::response();
     }
 }

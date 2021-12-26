@@ -14,10 +14,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('react');
-});
-
-Route::get('/{catchall?}', function () {
-    return response()->view('react');
-})->where('catchall', '(.*)');
+require base_path('routes/react/index.php');

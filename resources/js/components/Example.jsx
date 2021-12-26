@@ -1,38 +1,53 @@
 import React, {useEffect} from 'react';
-import ReactDOM from 'react-dom';
 
-function Example() {
+class Example extends React.Component {
 
-    useEffect(() => {
-        window.api.post('test', {one: 'a'})
-        .then(responce=>{
-            console.log(responce);
-            console.log('success');
-        })
-        .catch(errors=>{
-            console.log(errors);
-            console.log('error');
-        });
-    })
+    constructor(props){
+        super(props);
+        this.state = { timer: null }
+    }
 
-    return (
-        <div className="container">
-            <div className="row justify-content-center">
-                <div className="col-md-8">
-                    <div className="card">
-                        <div className="card-header">Example Component</div>
+    componentDidMount(){
+        this.timer = setInterval(()=>{
+            window.api.get('', {one: 'a'})
+            .then(response=>{
+                if(response.test){
+                    this.props.setState({test: response.test});
+                }
+            })
+            .catch(errors=>{
+                console.log(errors);
+            });
+        }, 3000);
+    }
+    componentWillUnmount(){
+        clearInterval(this.timer);
+    }
 
-                        <div className="card-body">I'm an example component!</div>
+    render(){
+        return (
+            <div className="container">
+                <div className="row justify-content-center">
+                    <div className="col-md-8">
+                        <div className="card">
+                            <div className="card-header">Example Component</div>
+                            {this.props.test}
+                            <div className="card-body">I'm an example component!</div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    );
+        );
+    }
 }
 
-
-export default Example;
-
-if (document.getElementById('app')) {
-    ReactDOM.render(<Example />, document.getElementById('app'));
+function mapStateToProps(state) {
+    return {
+        test: state.get("test")
+    };
 }
+
+var actions = require("../redux/actions.jsx");
+var connect = require("react-redux").connect;
+export default  connect(mapStateToProps, actions)(Example);
+

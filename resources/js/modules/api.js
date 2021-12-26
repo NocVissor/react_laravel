@@ -1,10 +1,14 @@
 export default class api{
-    url = '';
+    static url = '';
+    static noAjax = true;
+
+
     static init(data) {
         api.url = data.url;
     }
 
     static query(data){
+        api.noAjax = false
         var url = data.absolute_url?api.url:api.url+data.url;
         var method = data.type?data.type:'get';
         var data = data.data?data.data:[];
@@ -12,6 +16,7 @@ export default class api{
         if(!data.csrf){
             data.csrf = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
         }
+        data.api = true;
         if(!headers['X-CSRF-TOKEN']){
             headers['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
         }
@@ -28,15 +33,20 @@ export default class api{
                 return {};
             }
         }
-
-        console.log(headers);
+        console.log(data);
         return new Promise((resolve, reject) => {
-            window.axios({
+            var config = {
                 method,
-                url,
-                data,
                 headers,
-            }).then(data=>{
+            }
+            if(method == 'post'){
+                config.data = data;
+            }
+            else{
+                config.params = data;
+            }
+
+            window.axios(url, config).then(data=>{
                 if(data.data.type && data.data.type == 'success'){
                     resolve(data.data);
                 }

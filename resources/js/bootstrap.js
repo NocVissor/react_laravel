@@ -43,7 +43,7 @@ window.helper = helper;
 import api from './modules/api';
 
 api.init({
-    url: '/api/'
+    url: '/api'
 });
 
 window.api = api;
