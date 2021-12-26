@@ -17,3 +17,5 @@ yarn-error.log
 ftpsync.settings
 composer.lock
 package-lock.json
+public/js
+public/css

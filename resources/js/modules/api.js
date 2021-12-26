@@ -9,8 +9,12 @@ export default class api{
         var method = data.type?data.type:'get';
         var data = data.data?data.data:[];
         var headers = data.headers?data.headers:{};
-
-
+        if(!data.csrf){
+            data.csrf = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        }
+        if(!headers['X-CSRF-TOKEN']){
+            headers['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        }
         function error_handing(data){
 
             if(data.response) data = data.response;
@@ -25,6 +29,7 @@ export default class api{
             }
         }
 
+        console.log(headers);
         return new Promise((resolve, reject) => {
             window.axios({
                 method,
