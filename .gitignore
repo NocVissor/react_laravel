@@ -13,3 +13,7 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+/envs
+ftpsync.settings
+composer.lock
+package-lock.json
