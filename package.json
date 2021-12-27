@@ -24,6 +24,7 @@
         "sass-loader": "^11.0.1"
     },
     "dependencies": {
+        "jquery": "^3.6.0",
         "js-simple-store": "^1.0.0",
         "react": "^17.0.0",
         "react-dom": "^17.0.0",
