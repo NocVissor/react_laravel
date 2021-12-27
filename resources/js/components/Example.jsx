@@ -9,7 +9,7 @@ class Example extends React.Component {
 
     componentDidMount(){
         this.timer = setInterval(()=>{
-            window.api.get('', {one: 'a'})
+            window.api.get('/example', {one: 'a'})
             .then(response=>{
                 if(response.test){
                     this.props.setState({test: response.test});
@@ -18,7 +18,7 @@ class Example extends React.Component {
             .catch(errors=>{
                 console.log(errors);
             });
-        }, 3000);
+        }, 9000);
     }
     componentWillUnmount(){
         clearInterval(this.timer);

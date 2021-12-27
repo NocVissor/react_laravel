@@ -3,15 +3,24 @@ var reducer = require("./reducer.jsx");
 
 var store = redux.createStore(reducer);
 
+
+
+let inistate = {};
+
+if(typeof test !== 'undefined'){
+    inistate.test = test;
+}
+
+
+
+
+
+
+
 store.dispatch({
-  type: "SET_STATE",
-  state: {
-    test:  test
-  }
+    type: "SET_STATE",
+    state: inistate
 });
-console.log(store);
-
-
 
 import React from "react";
 var Provider = require("react-redux").Provider;

@@ -14,17 +14,17 @@ require('./bootstrap');
 
 
 
- var ReactDOM = require("react-dom");
+var ReactDOM = require("react-dom");
 
 
- import Example from './components/Example.jsx';
- import Store from './redux/store.jsx';
+import Store from './redux/store.jsx';
+import Router from './router/router_index.jsx';
 
- ReactDOM.render(
+ReactDOM.render(
     <Store>
-        <Example />
+        <Router />
     </Store>
    ,
    document.getElementById("app")
- );
+);
 
