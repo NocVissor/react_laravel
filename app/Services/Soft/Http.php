@@ -1,8 +1,6 @@
 <?php
 namespace App\Services\Soft;
 
-use Barryvdh\Debugbar\Facades\Debugbar;
-
 class Http{
     static public $code = 200;
     static public $errors = [];
@@ -19,15 +17,12 @@ class Http{
                 ->withHeaders(self::$headers);
         }
         else{
-
+            self::$body['noAjax'] = true;
+            date_default_timezone_set("Europe/London");
+            self::$body['time'] = time();
             \JavaScript::put(
                 self::$body
             );
-
-            \Debugbar::info(
-                self::$body
-            );
-
             return response()
             ->view('react', [], self::$code)
             ->withHeaders(self::$headers);

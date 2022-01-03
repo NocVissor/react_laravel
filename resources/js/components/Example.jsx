@@ -1,29 +1,33 @@
 import React, {useEffect} from 'react';
 
-class Example extends React.Component {
+export default class Example extends React.Component {
 
     constructor(props){
         super(props);
-        this.state = { timer: null }
+        this.state = {test: null}
+        this.updateAxios = this.updateAxios.bind(this);
+    }
+
+    updateAxios(){
+        window.api.post('/example'+this.props.id ).then(responce=>{
+            this.setState({test: responce.test});
+        });
     }
 
     componentDidMount(){
-        this.timer = setInterval(()=>{
-            window.api.get('/example', {one: 'a'})
-            .then(response=>{
-                if(response.test){
-                    this.props.setState({test: response.test});
-                }
-            })
-            .catch(errors=>{
-                console.log(errors);
-            });
-        }, 9000);
+            if(noAjax && typeof test !== 'undefined'){
+                noAjax = false;
+                this.setState({test: test});
+            }
+            else{
+                this.updateAxios();
+            }
     }
-    componentWillUnmount(){
-        clearInterval(this.timer);
+    componentDidUpdate(prevProps){
+        if(this.props.id != prevProps.id){
+            this.updateAxios();
+        }
     }
-
     render(){
         return (
             <div className="container">
@@ -31,7 +35,7 @@ class Example extends React.Component {
                     <div className="col-md-8">
                         <div className="card">
                             <div className="card-header">Example Component</div>
-                            {this.props.test}
+                            {this.state.test}
                             <div className="card-body">I'm an example component!</div>
                         </div>
                     </div>
@@ -40,14 +44,4 @@ class Example extends React.Component {
         );
     }
 }
-
-function mapStateToProps(state) {
-    return {
-        test: state.get("test")
-    };
-}
-
-var actions = require("../redux/actions.jsx");
-var connect = require("react-redux").connect;
-export default  connect(mapStateToProps, actions)(Example);
 

@@ -39,5 +39,15 @@ import api from './modules/api';
 api.init({
     url: '/api'
 });
-
 window.api = api;
+
+import init from './modules/init';
+init();
+
+import moment from 'moment';
+
+var now = moment().utc();
+time = moment(time*1000 + 1000*66).utc();
+
+let raz = now - time;
+if(raz < -1000*10 || raz > 1000*10) noAjax = false;

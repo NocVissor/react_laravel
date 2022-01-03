@@ -1,16 +1,13 @@
 var redux = require("redux");
-var reducer = require("./reducer.jsx");
+var user = require("./reducers/user.jsx");
 
-var store = redux.createStore(reducer);
+var store = redux.createStore({reducer});
 
 
 
-let inistate = {};
-
-if(typeof test !== 'undefined'){
-    inistate.test = test;
-}
-
+let inistate = {
+    user: null
+};
 
 
 

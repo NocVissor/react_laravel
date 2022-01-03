@@ -3,4 +3,30 @@ header{
     color: white;
     padding-top: 8px;
     padding-bottom: 8px;
+    a{
+        color: white;
+        text-decoration: none;
+        &:hover {
+            color:white;
+            text-decoration: underline;
+        }
+        &.active{
+            text-decoration: underline;
+        }
+        &:not(:last-child){
+            margin-right: 15px;
+        }
+    }
+    .auth{
+        display: flex;
+        justify-content: flex-end;
+    }
+}
+
+
+.from-group {
+    margin-bottom: 1rem;
+    label {
+        margin-bottom: .5rem;
+    }
 }
