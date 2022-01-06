@@ -14,4 +14,4 @@ Route::get('/login', function(){
 });
 
 Route::any('/example', [TestController::class, 'example']);
-Route::any('/example2', [TestController::class, 'example2']);
+//Route::any('/example2', [TestController::class, 'example2']);

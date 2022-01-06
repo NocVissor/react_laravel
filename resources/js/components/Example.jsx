@@ -11,10 +11,12 @@ export default class Example extends React.Component {
     updateAxios(){
         window.api.post('/example'+this.props.id ).then(responce=>{
             this.setState({test: responce.test});
-        });
+        }).catch(()=>{});
     }
 
     componentDidMount(){
+        window.add_init(()=>{
+
             if(noAjax && typeof test !== 'undefined'){
                 noAjax = false;
                 this.setState({test: test});
@@ -22,6 +24,8 @@ export default class Example extends React.Component {
             else{
                 this.updateAxios();
             }
+
+        });
     }
     componentDidUpdate(prevProps){
         if(this.props.id != prevProps.id){

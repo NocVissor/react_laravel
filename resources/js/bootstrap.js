@@ -41,13 +41,8 @@ api.init({
 });
 window.api = api;
 
-import init from './modules/init';
+import init, {add_init} from './modules/init';
+
+window.add_init = add_init;
+
 init();
-
-import moment from 'moment';
-
-var now = moment().utc();
-time = moment(time*1000 + 1000*66).utc();
-
-let raz = now - time;
-if(raz < -1000*10 || raz > 1000*10) noAjax = false;

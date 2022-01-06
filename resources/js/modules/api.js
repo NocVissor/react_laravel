@@ -1,5 +1,5 @@
 import { toast } from 'react-toastify';
-
+import store from 'js-simple-store';
 
 export default class api{
     static url = '';
@@ -21,13 +21,14 @@ export default class api{
         }
         dataParams.api = true;
         function error_handing(data){
-
             if(data.response) data = data.response;
-
             if(typeof data.data.errors !== 'undefined'){
                 let errors = data.data.errors
                 if(errors.messageError){
                     toast.error(errors.messageError);
+                }
+                if(data.status == 404){
+                    api.setCode(404);
                 }
                 return errors;
             }
@@ -68,5 +69,8 @@ export default class api{
     }
     static get(url, data = {}, headers = {}){
         return api.query({url, data, headers, type: 'get'});
+    }
+    static setCode(Scode){
+        store.setState('code', Scode);
     }
 }

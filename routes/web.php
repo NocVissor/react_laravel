@@ -15,3 +15,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 require base_path('routes/react/index.php');
+
+
+use App\Services\Soft\Http;
+Route::any('/{page?}',function(){
+    return Http::notFound();
+  })->where('page','.*');

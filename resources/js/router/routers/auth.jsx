@@ -1,6 +1,6 @@
-import Auth from '../middleware/auth';
-import Login from '../components/auth/login.jsx';
-import routes from './routes';
+import Auth from '../../middleware/auth';
+import Login from '../../components/auth/login.jsx';
+import routes from '../routes';
 import React from 'react';
 import { Route, Routes, Navigate  } from 'react-router-dom';
 

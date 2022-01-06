@@ -4,13 +4,13 @@ namespace App\Services\Soft;
 class Http{
     static public $code = 200;
     static public $errors = [];
-    static public $body = [];
+    static public $body = ['code' => 200];
     static public $headers = [];
 
 
     static public function response(){
         self::$body['errors'] = self::$errors;
-
+        self::$body['code'] = self::$code;
 
         if(isset(request()->all()['api']) && request()->all()['api']){
             return response(self::$body, self::$code)
@@ -18,14 +18,19 @@ class Http{
         }
         else{
             self::$body['noAjax'] = true;
-            date_default_timezone_set("Europe/London");
             self::$body['time'] = time();
+
+
+            http_response_code(self::$code);
+
             \JavaScript::put(
                 self::$body
             );
+
             return response()
-            ->view('react', [], self::$code)
+            ->view('react')
             ->withHeaders(self::$headers);
+
         }
     }
 
@@ -34,6 +39,10 @@ class Http{
         self::$code = $code;
         self::$body['type'] = 'error';
         return self::response();
+    }
+
+    static public function notFound(){
+        return self::error([], 404);
     }
 
 

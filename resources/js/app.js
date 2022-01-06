@@ -18,7 +18,7 @@ var ReactDOM = require("react-dom");
 
 
 //import Store from './redux/store.jsx';
-import Router from './router/router_index.jsx';
+import Router from './router/router_container.jsx';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
