@@ -3,6 +3,8 @@ export default {
     example: '/example',
     example2: '/example2',
     login: '/login',
-    home: '/'
+    register: '/register',
+    home: '/',
+    verify: '/email/verify/:id/:hash'
 }
 

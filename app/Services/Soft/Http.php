@@ -11,7 +11,6 @@ class Http{
     static public function response(){
         self::$body['errors'] = self::$errors;
         self::$body['code'] = self::$code;
-
         if(isset(request()->all()['api']) && request()->all()['api']){
             return response(self::$body, self::$code)
                 ->withHeaders(self::$headers);

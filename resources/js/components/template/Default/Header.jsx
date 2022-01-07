@@ -25,6 +25,7 @@ export default class Header extends React.Component{
                         No ={()=>
                             <div className="col auth">
                                 <NavLink to={routes.login}>Вход</NavLink>
+                                <NavLink to={routes.register}>Регистрация</NavLink>
                             </div>
                         }/>
                     </div>
