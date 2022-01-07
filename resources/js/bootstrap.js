@@ -45,4 +45,4 @@ import init, {add_init} from './modules/init';
 
 window.add_init = add_init;
 
-init();
+init(true);

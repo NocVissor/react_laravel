@@ -6,14 +6,13 @@ import routes from '../routes';
 import React from 'react';
 import { Route, Routes, Navigate  } from 'react-router-dom';
 
-export default ()=>{
-    return (
-        <Routes>
+export default (
+        <React.Fragment>
             <Route path={routes.login} element={
                 <Auth No={()=>
                     <Login/>
                 } Yes={()=>
-                    <Navigate to={routes.home} />
+                    <Navigate to={routes.unAuth} />
                 } />
             } />
 
@@ -21,7 +20,7 @@ export default ()=>{
                 <Auth No={()=>
                     <Register/>
                 } Yes={()=>
-                    <Navigate to={routes.home} />
+                    <Navigate to={routes.unAuth} />
                 } />
             } />
 
@@ -33,6 +32,7 @@ export default ()=>{
                 } />
             } />
 
-        </Routes>
-    )
-}
+
+
+        </React.Fragment>
+    );

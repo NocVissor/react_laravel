@@ -19,6 +19,8 @@ class Init{
         if($user){
             $result['user'] = [
                 'id' => $user->id,
+                'name' => $user->name,
+                'verify' => $user->hasVerifiedEmail()
             ];
         }
 

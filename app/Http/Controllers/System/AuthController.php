@@ -71,4 +71,9 @@ class AuthController extends BaseController{
         $request->user()->sendEmailVerificationNotification();
         return Http::success(['status'=>'send']);
     }
+    public function logout()
+    {
+        Auth::logout();
+        return Http::success();
+    }
 }

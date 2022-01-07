@@ -7,7 +7,7 @@ export function add_init(action){
     actions.push(action);
     if(ready) action();
 }
-export default function init(){
+export default function init(full=false){
     window.api.post('/init', {time}).then((response)=>{
         if(typeof response.user !== 'undefined'){
             store.setState('user', response.user);
@@ -15,9 +15,11 @@ export default function init(){
                 noAjax = false;
             }
             ready = true;
-            actions.forEach((val)=>{
-                val();
-            })
+            if(full){
+                actions.forEach((val)=>{
+                    val();
+                })
+            }
         }
     });
 }
