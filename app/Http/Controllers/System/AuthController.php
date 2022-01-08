@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Events\Verified;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Str;
+use Illuminate\Auth\Events\PasswordReset;
 
 class AuthController extends BaseController{
     public function login(Request $request){
@@ -71,9 +74,65 @@ class AuthController extends BaseController{
         $request->user()->sendEmailVerificationNotification();
         return Http::success(['status'=>'send']);
     }
+
     public function logout()
     {
         Auth::logout();
         return Http::success();
+    }
+
+    public function forgot(Request $request){
+        $validated = Validator::make($request->all(), [
+            'email' => ['required', 'email']
+        ]);
+        if ($validated->fails()) {
+            return Http::error($validated->errors()->toArray());
+        }
+
+        if(!User::where('email', $request['email'])->first()){
+            return Http::error(['messageError'=>'Пользователь с таким email не найден']);
+        }
+
+        $status = Password::sendResetLink(
+            ['email' => $request['email']]
+        );
+
+        if($status == 'passwords.sent'){
+            return Http::success();
+        }
+        else if($status == 'passwords.throttled'){
+            return Http::error(['messageError'=>'Отправлено слишком много сообщений']);
+        }
+    }
+
+    public function resend(Request $request){
+        $validated = Validator::make($request->all(), [
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|min:8|confirmed',
+        ]);
+        if ($validated->fails()) {
+            return Http::error($validated->errors()->toArray());
+        }
+
+        $status = Password::reset(
+            $request->only('email', 'password', 'password_confirmation', 'token'),
+            function ($user, $password) use ($request) {
+                $user->forceFill([
+                    'password' => Hash::make($password)
+                ])->setRememberToken(Str::random(60));
+
+                $user->save();
+
+                event(new PasswordReset($user));
+            }
+        );
+
+        if($status == Password::PASSWORD_RESET){
+            return Http::success();
+        }
+        else{
+            return Http::error(['messageError'=>'Не удалось сбросить пароль']);
+        }
     }
 }

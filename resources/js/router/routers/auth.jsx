@@ -1,6 +1,8 @@
 import Auth from '../../middleware/auth';
 import Login from '../../components/auth/login.jsx';
 import Register from '../../components/auth/register.jsx';
+import Forgot from '../../components/auth/forgot.jsx';
+import Resend from '../../components/auth/resend.jsx';
 import Verify from '../../components/auth/verify.jsx';
 import routes from '../routes';
 import React from 'react';
@@ -32,7 +34,20 @@ export default (
                 } />
             } />
 
-
+            <Route path={routes.forgot} element={
+                <Auth No={()=>
+                    <Forgot/>
+                } Yes={()=>
+                    <Navigate to={routes.unAuth} />
+                } />
+            } />
+            <Route path={routes.resend} element={
+                <Auth No={()=>
+                    <Resend/>
+                } Yes={()=>
+                    <Navigate to={routes.unAuth} />
+                } />
+            } />
 
         </React.Fragment>
     );
