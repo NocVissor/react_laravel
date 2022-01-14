@@ -6,7 +6,7 @@ import Resend from '../../components/auth/resend.jsx';
 import Verify from '../../components/auth/verify.jsx';
 import routes from '../routes';
 import React from 'react';
-import { Route, Routes, Navigate  } from 'react-router-dom';
+import { Route, Navigate  } from 'react-router-dom';
 
 export default (
         <React.Fragment>

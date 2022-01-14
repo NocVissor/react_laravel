@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from "react";
 import Auth from '../../../middleware/auth';
+import Admin from '../../../middleware/admin';
 import {NavLink} from "react-router-dom";
 import routes from "../../../router/routes";
 import store from 'js-simple-store';
 
 export default ()=>{
 
-    const [user, setUser] = useState(store.getState('user', null));
+    const [user, setUser] = useState(store.getState('user', {}));
     let cal = store.addCallback('user', ({to})=>{
         setUser(to)
     });
@@ -22,6 +23,9 @@ export default ()=>{
                         <NavLink to={routes.home}>Главная</NavLink>
                         <NavLink to={routes.example}>Ex</NavLink>
                         <NavLink to={routes.example2}>Ex-2</NavLink>
+                        <Admin Yes={()=>
+                            <NavLink to={routes.admin.users}>Пользователи</NavLink>
+                        }/>
                     </div>
                     <Auth Yes={()=>
                         <div className="col user">

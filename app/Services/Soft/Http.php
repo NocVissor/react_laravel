@@ -8,10 +8,14 @@ class Http{
     static public $headers = [];
 
 
+    static public function check_ajax(){
+        return (isset(request()->all()['api']) && request()->all()['api']);
+    }
+
     static public function response(){
         self::$body['errors'] = self::$errors;
         self::$body['code'] = self::$code;
-        if(isset(request()->all()['api']) && request()->all()['api']){
+        if(self::check_ajax()){
             return response(self::$body, self::$code)
                 ->withHeaders(self::$headers);
         }

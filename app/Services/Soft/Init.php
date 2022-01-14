@@ -20,6 +20,7 @@ class Init{
             $result['user'] = [
                 'id' => $user->id,
                 'name' => $user->name,
+                'role' => $user->role,
                 'verify' => $user->hasVerifiedEmail()
             ];
         }

@@ -1,3 +1,5 @@
+import admin from './routes/admin';
+
 export default {
     example: '/example',
     example2: '/example2',
@@ -8,9 +10,7 @@ export default {
     verify: '/email/verify/:id/:hash',
     forgot: '/password/forgot',
     resend: '/password/resend',
-
-
-
-    unAuth: '/'
+    unAuth: '/',
+    admin
 }
 

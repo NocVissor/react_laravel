@@ -2,6 +2,7 @@ import routes from '../routes';
 import React from 'react';
 import { Route, Routes, Navigate  } from 'react-router-dom';
 import RouterAuth from './auth.jsx';
+import RouterAdmin from './admin.jsx';
 
 import Home from '../../components/Home.jsx';
 import Example from '../../components/Example.jsx';
@@ -24,6 +25,7 @@ export default ()=>{
                     } />
                 } />
                 {RouterAuth}
+                {RouterAdmin}
 
             </Routes>
 

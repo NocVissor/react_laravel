@@ -30,6 +30,8 @@
         "moment": "^2.29.1",
         "react": "^17.0.0",
         "react-dom": "^17.0.0",
+        "react-js-pagination": "^3.0.3",
+        "react-bootstrap": "^2.1.1",
         "react-redux": "^7.2.6",
         "react-router-dom": "^6.2.1",
         "react-toastify": "^8.1.0",
