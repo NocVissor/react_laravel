@@ -8544,9 +8544,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
         })["catch"](function () {});
       }
     });
-    return function () {
-      return store.clearCallback('user', calId);
-    };
   }, [noChange]);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_template_Default_Cart__WEBPACK_IMPORTED_MODULE_0__["default"], {
     header: 'Настройки',
@@ -9361,17 +9358,11 @@ function setUser(user) {
 
 /***/ }),
 
-/***/ "./resources/js/redux/reducer.jsx":
-/*!****************************************!*\
-  !*** ./resources/js/redux/reducer.jsx ***!
-  \****************************************/
+/***/ "./resources/js/redux/reducers/code.jsx":
+/*!**********************************************!*\
+  !*** ./resources/js/redux/reducers/code.jsx ***!
+  \**********************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var Map = (__webpack_require__(/*! immutable */ "./node_modules/immutable/dist/immutable.es.js").Map);
 
@@ -9380,18 +9371,32 @@ var reducer = function reducer() {
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
-    case "SET_STATE":
-      return state.merge(action.state);
-
-    case "SET_USER":
-      return _objectSpread(_objectSpread({}, state), {}, {
-        user: action.user
-      });
-
     case "SET_CODE":
-      return _objectSpread(_objectSpread({}, state), {}, {
-        code: action.code
-      });
+      return action.code;
+  }
+
+  return state;
+};
+
+module.exports = reducer;
+
+/***/ }),
+
+/***/ "./resources/js/redux/reducers/user.jsx":
+/*!**********************************************!*\
+  !*** ./resources/js/redux/reducers/user.jsx ***!
+  \**********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var Map = (__webpack_require__(/*! immutable */ "./node_modules/immutable/dist/immutable.es.js").Map);
+
+var reducer = function reducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case "SET_USER":
+      return action.user;
   }
 
   return state;
@@ -9412,12 +9417,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Store)
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var _reducer_jsx__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./reducer.jsx */ "./resources/js/redux/reducer.jsx");
-/* harmony import */ var _reducer_jsx__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_reducer_jsx__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _actions_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./actions.jsx */ "./resources/js/redux/actions.jsx");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var _reducers_code_jsx__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./reducers/code.jsx */ "./resources/js/redux/reducers/code.jsx");
+/* harmony import */ var _reducers_code_jsx__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_reducers_code_jsx__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _reducers_user_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./reducers/user.jsx */ "./resources/js/redux/reducers/user.jsx");
+/* harmony import */ var _reducers_user_jsx__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_reducers_user_jsx__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _actions_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./actions.jsx */ "./resources/js/redux/actions.jsx");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -9442,16 +9449,20 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-
 var Provider = (__webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js").Provider);
 
-var store = (0,redux__WEBPACK_IMPORTED_MODULE_1__.createStore)((_reducer_jsx__WEBPACK_IMPORTED_MODULE_0___default()), {
+
+
+var store = (0,redux__WEBPACK_IMPORTED_MODULE_2__.createStore)((0,redux__WEBPACK_IMPORTED_MODULE_2__.combineReducers)({
+  code: (_reducers_code_jsx__WEBPACK_IMPORTED_MODULE_0___default()),
+  user: (_reducers_user_jsx__WEBPACK_IMPORTED_MODULE_1___default())
+}), {
   user: null,
   code: typeof code === 'undefined' ? 200 : code
 });
 window.store = store;
 
-window.actions = _actions_jsx__WEBPACK_IMPORTED_MODULE_2__;
+window.actions = _actions_jsx__WEBPACK_IMPORTED_MODULE_3__;
 
 
 
@@ -9471,7 +9482,7 @@ var Store = /*#__PURE__*/function (_React$Component) {
   _createClass(Store, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(Provider, {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(Provider, {
         store: store,
         children: this.props.children
       });
@@ -9479,7 +9490,7 @@ var Store = /*#__PURE__*/function (_React$Component) {
   }]);
 
   return Store;
-}(react__WEBPACK_IMPORTED_MODULE_3__.Component);
+}(react__WEBPACK_IMPORTED_MODULE_4__.Component);
 
 
 

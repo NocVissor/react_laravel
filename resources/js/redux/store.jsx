@@ -1,8 +1,15 @@
-import {createStore} from "redux";
-import reducer from './reducer.jsx';
+import {createStore, combineReducers} from "redux";
 var Provider = require("react-redux").Provider;
 
-var store = createStore(reducer, {
+
+
+
+
+
+import codeR from './reducers/code.jsx';
+import userR from './reducers/user.jsx';
+
+var store = createStore(combineReducers({code: codeR, user: userR}), {
   user: null,
   code: (typeof code === 'undefined')?200:code
 });

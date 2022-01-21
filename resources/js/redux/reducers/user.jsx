@@ -1,16 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit'
+var Map = require("immutable").Map;
 
-export const userSlice = createSlice({
-    name: 'user',
-    initialState: null,
-    reducers: {
-      set: (state, action) => {
-        state = action
-      },
-    },
-  })
-
-  // Action creators are generated for each case reducer function
-  export const { set } = userSlice.actions
-
-  export default userSlice.reducer
+var reducer = function(state = [], action) {
+  switch (action.type) {
+    case "SET_USER":
+        return action.user
+  }
+  return state;
+}
+module.exports = reducer;
