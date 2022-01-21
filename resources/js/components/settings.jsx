@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import init from '../modules/init.js';
 import Input from './template/Default/Elements/InputFG.jsx';
 import { toast } from 'react-toastify';
-import store from 'js-simple-store';
+import { useSelector } from "react-redux";
 export default ()=>{
 
     const [email, setEmail] = useState('');
@@ -20,13 +20,7 @@ export default ()=>{
         setName(user.name);
     }
 
-
-
-
-    const [Suser, SetUser] = useState(store.getState('user', {}));
-    let calId = store.addCallback('user', ({to})=>{
-        SetUser(to)
-    });
+    const Ruser = useSelector(state => state.user);
 
     useEffect(()=>{
         window.add_init(()=>{
@@ -58,7 +52,7 @@ export default ()=>{
         body={
             <form>
                 <Input label="email" id="email" value={email} onChange={e=>setEmail(e.target.value)} errors={errors.email}/>
-                { !Suser.verify && <button type="button" className="btn btn-success" onClick={()=>{
+                { !Ruser.verify && <button type="button" className="btn btn-success" onClick={()=>{
                     window.api.post('/email/verify/resend')
                         .then(response=>{
                             toast.success('Письмо отправлено!');

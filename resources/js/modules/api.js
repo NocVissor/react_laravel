@@ -1,5 +1,4 @@
 import { toast } from 'react-toastify';
-import store from 'js-simple-store';
 
 export default class api{
     static url = '';
@@ -70,7 +69,7 @@ export default class api{
     static get(url, data = {}, headers = {}){
         return api.query({url, data, headers, type: 'get'});
     }
-    static setCode(Scode){
-        store.setState('code', Scode);
+    static setCode(code){
+        window.store.dispatch(window.actions.setCode(code));
     }
 }

@@ -3,17 +3,11 @@ import Auth from '../../../middleware/auth';
 import Admin from '../../../middleware/admin';
 import {NavLink} from "react-router-dom";
 import routes from "../../../router/routes";
-import store from 'js-simple-store';
+import { useSelector } from "react-redux";
 
 export default ()=>{
 
-    const [user, setUser] = useState(store.getState('user', {}));
-    let cal = store.addCallback('user', ({to})=>{
-        setUser(to)
-    });
-    useEffect(() =>()=>store.clearCallback('user', cal));
-
-    const [open, setOpen] = useState(false);
+    const user = useSelector(state => state.user);
 
     return(
         <header>

@@ -5,8 +5,10 @@ import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import Template from '../components/template/Default/Index.jsx';
 import RouterIndex from './routers/index.jsx';
 import NF from '../components/404.jsx';
-import store from 'js-simple-store';
 
+
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useLocation } from 'react-router-dom';
 
 
@@ -14,16 +16,17 @@ var firstLoad = true;
 
 function RouterHandler(props){
     const location = useLocation();
+    const dispatch = useDispatch();
     useEffect(() => {
         if(!firstLoad){
-            if(store.getState('code', code) == 404){
-                store.setState('code', 200);
+            if(window.store.getState().code == 404){
+                dispatch(window.actions.setCode(200));
             }
         }
         else{
             firstLoad = false;
         }
-    });
+    },[location.pathname, location.search]);
 
     return (<>
         {props.children}
@@ -35,17 +38,9 @@ function RouterHandler(props){
 
 
 export default function RouterContainer(params) {
-
-
-    var StoreCode = store.getState('code', code);
-
-    const [Hcode, SetHcode] = useState(StoreCode);
-    let calId = store.addCallback('code', ({to})=>{
-        SetHcode(to)
-    });
-    useEffect(() =>()=>store.clearCallback('code', calId));
+    const code = useSelector(state=>state.code);
     let Content;
-    if(Hcode == 404){
+    if(code == 404){
         Content = <NF/>
     }
     else{

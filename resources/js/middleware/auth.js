@@ -1,14 +1,9 @@
-import store from 'js-simple-store';
+import { useSelector } from "react-redux";
 
 import {useState, useEffect} from 'react';
 
 export default function Auth(props){
-    var StoreUser = store.getState('user', null);
-    const [user, SetUser] = useState(StoreUser);
-    let calId = store.addCallback('user', ({to})=>{
-        SetUser(to)
-    });
-    useEffect(() =>()=>store.clearCallback('user', calId));
+    const user = useSelector(state=>state.user)
 
     if(user !== null && user && props.Yes){
         var Yes = props.Yes;

@@ -1,23 +1,14 @@
-var redux = require("redux");
-var user = require("./reducers/user.jsx");
+import {createStore} from "redux";
+import reducer from './reducer.jsx';
+var Provider = require("react-redux").Provider;
 
-var store = redux.createStore({reducer});
-
-
-
-let inistate = {
-    user: null
-};
-
-
-
-
-
-
-store.dispatch({
-    type: "SET_STATE",
-    state: inistate
+var store = createStore(reducer, {
+  user: null,
+  code: (typeof code === 'undefined')?200:code
 });
+window.store = store;
+import * as actions from "./actions.jsx";
+window.actions = actions;
 
 import React from "react";
 var Provider = require("react-redux").Provider;

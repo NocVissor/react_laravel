@@ -1,6 +1,3 @@
-import store from 'js-simple-store';
-
-
 var ready = false;
 var actions = [];
 export function add_init(action){
@@ -10,7 +7,7 @@ export function add_init(action){
 export default function init(full=false){
     window.api.post('/init', {time}).then((response)=>{
         if(typeof response.user !== 'undefined'){
-            store.setState('user', response.user);
+            window.store.dispatch(window.actions.setUser(response.user))
             if(response.new_time - response.old_time > 10){
                 noAjax = false;
             }
