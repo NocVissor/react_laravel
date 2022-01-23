@@ -3,8 +3,8 @@ import { useState, useEffect } from "react";
 import init from '../modules/init.js';
 import Input from './template/Default/Elements/InputFG.jsx';
 import { toast } from 'react-toastify';
-import { useSelector } from "react-redux";
-export default ()=>{
+import { observer } from "mobx-react"
+export default observer(()=>{
 
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
@@ -20,7 +20,7 @@ export default ()=>{
         setName(user.name);
     }
 
-    const Ruser = useSelector(state => state.user);
+    const user = window.store.user;
 
     useEffect(()=>{
         window.add_init(()=>{
@@ -50,7 +50,7 @@ export default ()=>{
         body={
             <form>
                 <Input label="email" id="email" value={email} onChange={e=>setEmail(e.target.value)} errors={errors.email}/>
-                { !Ruser.verify && <button type="button" className="btn btn-success" onClick={()=>{
+                { !user.verify && <button type="button" className="btn btn-success" onClick={()=>{
                     window.api.post('/email/verify/resend')
                         .then(response=>{
                             toast.success('Письмо отправлено!');
@@ -98,4 +98,4 @@ export default ()=>{
             </form>
         }/>
     );
-}
+});

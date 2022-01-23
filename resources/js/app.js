@@ -17,17 +17,16 @@ require('./bootstrap');
 var ReactDOM = require("react-dom");
 
 
-import Store from './redux/store.jsx';
 import Router from './router/router_container.jsx';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 ReactDOM.render(
-    <Store>
+    <>
         <Router />
         <ToastContainer />
-    </Store>
+    </>
    ,
    document.getElementById("app")
 );

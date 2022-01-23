@@ -1,14 +1,11 @@
-import React, {useState, useEffect} from "react";
+import React, {useEffect} from "react";
 
-import { Route, Routes, BrowserRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 import Template from '../components/template/Default/Index.jsx';
 import RouterIndex from './routers/index.jsx';
 import NF from '../components/404.jsx';
 
-
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
 import { useLocation } from 'react-router-dom';
 
 
@@ -16,11 +13,10 @@ var firstLoad = true;
 
 function RouterHandler(props){
     const location = useLocation();
-    const dispatch = useDispatch();
     useEffect(() => {
         if(!firstLoad){
-            if(window.store.getState().code == 404){
-                dispatch(window.actions.setCode(200));
+            if(window.store.code == 404){
+                window.store.code = 200;
             }
         }
         else{
@@ -35,12 +31,11 @@ function RouterHandler(props){
 
 
 
+import { observer } from "mobx-react"
 
-
-export default function RouterContainer(params) {
-    const code = useSelector(state=>state.code);
+export default observer((props)=>{
     let Content;
-    if(code == 404){
+    if(window.store.code == 404){
         Content = <NF/>
     }
     else{
@@ -56,7 +51,7 @@ export default function RouterContainer(params) {
             </Template>
         </BrowserRouter>
     )
-}
+});
 
 
 

@@ -1,9 +1,7 @@
-import { useSelector } from "react-redux";
+import { observer } from "mobx-react"
 
-import {useState, useEffect} from 'react';
-
-export default function Auth(props){
-    const user = useSelector(state=>state.user)
+export default observer((props)=>{
+    const user = window.store.user;
 
     if(user !== null && user && props.Yes){
         var Yes = props.Yes;
@@ -14,4 +12,4 @@ export default function Auth(props){
         return <No />;
     }
     return null;
-}
+});

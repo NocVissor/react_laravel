@@ -3,11 +3,10 @@ import Auth from '../../../middleware/auth';
 import Admin from '../../../middleware/admin';
 import {NavLink} from "react-router-dom";
 import routes from "../../../router/routes";
-import { useSelector } from "react-redux";
+import { observer } from "mobx-react"
+export default observer(()=>{
 
-export default ()=>{
-
-    const user = useSelector(state => state.user);
+    const user = window.store.user;
 
     return(
         <header>
@@ -36,4 +35,4 @@ export default ()=>{
             </div>
         </header>
     )
-}
+});

@@ -45,4 +45,12 @@ import init, {add_init} from './modules/init';
 
 window.add_init = add_init;
 
+
+
+
+
+window.models = {};
+import Store from './models/store';
+window.store = Store;
+
 init(true);

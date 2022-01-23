@@ -70,6 +70,6 @@ export default class api{
         return api.query({url, data, headers, type: 'get'});
     }
     static setCode(code){
-        window.store.dispatch(window.actions.setCode(code));
+        window.store.code = code;
     }
 }
