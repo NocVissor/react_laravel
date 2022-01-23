@@ -12,9 +12,8 @@ class Init{
         $result = [
             'user' => false,
             'old_time' => $old_time,
-            'new_time' => $new_time
+            'new_time' => $new_time,
         ];
-
         $user = Auth::user();
         if($user){
             $result['user'] = [

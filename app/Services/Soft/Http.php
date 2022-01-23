@@ -22,7 +22,9 @@ class Http{
         else{
             self::$body['noAjax'] = true;
             self::$body['time'] = time();
-
+            if(!isset(self::$body['title'])){
+                self::$body['title'] = config('app.name');
+            }
 
             http_response_code(self::$code);
 
@@ -31,7 +33,7 @@ class Http{
             );
 
             return response()
-            ->view('react')
+            ->view('react', self::$body)
             ->withHeaders(self::$headers);
 
         }

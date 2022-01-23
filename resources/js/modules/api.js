@@ -29,6 +29,7 @@ export default class api{
                 if(data.status == 404){
                     api.setCode(404);
                 }
+                send_handing(data.data);
                 return errors;
             }
             else{
@@ -37,6 +38,15 @@ export default class api{
                 return {};
             }
         }
+
+
+        function send_handing(data){
+            if(typeof data.title !== 'undefined'){
+                document.title = data.title;
+            }
+            return data;
+        }
+
         return new Promise((resolve, reject) => {
             var config = {
                 method,
@@ -51,7 +61,7 @@ export default class api{
             config.url = url;
             window.axios.request(config).then(data=>{
                 if(data.data.type && data.data.type == 'success'){
-                    resolve(data.data);
+                    resolve(send_handing(data.data));
                 }
                 else{
                     reject(error_handing(data));
