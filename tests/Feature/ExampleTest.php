@@ -4,7 +4,7 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
-
+use App\Models\User;
 class ExampleTest extends TestCase
 {
     /**
@@ -14,8 +14,10 @@ class ExampleTest extends TestCase
      */
     public function test_example()
     {
-        $response = $this->get('/');
-
-        $response->assertStatus(200);
+        $admin = User::factory()->make(['role'=>'admin']);
+        $response = $this->actingAs($admin)->call('get', '/api/admin/users/all', ['api'=>true, 'count'=>20, 'page'=>1]);
+        $response->assertStatus(200)->assertJson([
+            'users' => true,
+        ]);;
     }
 }
