@@ -52,5 +52,6 @@ window.add_init = add_init;
 window.models = {};
 import Store from './models/store';
 window.store = Store;
-
+import routes from './router/routes';
+window.routes = routes;
 init(true);

@@ -3,7 +3,8 @@ import { useState, useEffect } from "react";
 import init from '../modules/init.js';
 import Input from './template/Default/Elements/InputFG.jsx';
 import { toast } from 'react-toastify';
-import { observer } from "mobx-react"
+import { observer } from "mobx-react";
+import {NavLink} from 'react-router-dom';
 export default observer(()=>{
 
     const [email, setEmail] = useState('');
@@ -20,7 +21,7 @@ export default observer(()=>{
         setName(user.name);
     }
 
-    const user = window.store.user;
+    const storeUser = window.store.user;
 
     useEffect(()=>{
         window.add_init(()=>{
@@ -29,20 +30,12 @@ export default observer(()=>{
                 parseUser(user);
             }
             else{
-                window.api.get('/settings' ).then(responce=>{
-                    parseUser(responce.user);
+                window.api.get('/settings' ).then(response=>{
+                    parseUser(response.user);
                 }).catch(()=>{});
             }
         });
     }, [noChange]);
-
-
-
-
-
-
-
-
 
     return (
         <Cart
@@ -50,7 +43,7 @@ export default observer(()=>{
         body={
             <form>
                 <Input label="email" id="email" value={email} onChange={e=>setEmail(e.target.value)} errors={errors.email}/>
-                { !user.verify && <button type="button" className="btn btn-success" onClick={()=>{
+                { !storeUser.verify && <button type="button" className="btn btn-success" onClick={()=>{
                     window.api.post('/email/verify/resend')
                         .then(response=>{
                             toast.success('Письмо отправлено!');
@@ -62,7 +55,9 @@ export default observer(()=>{
                 }
 
                 <Input label="Логин" id="name" value={name} onChange={e=>setName(e.target.value)} errors={errors.name}/>
-                <Input label="Старый пароль" type="password" id="old" value={old} onChange={e=>setOld(e.target.value)} errors={errors.old}/>
+                <Input
+                after={<NavLink to={window.routes.forgot}>Не помню старый пароль</NavLink>}
+                label="Старый пароль" type="password" id="old" value={old} onChange={e=>setOld(e.target.value)} errors={errors.old}/>
                 <Input label="Новый пароль" type="password" id="password" value={password} onChange={e=>setPassword(e.target.value)} errors={errors.password}/>
                 <Input label="Повтроите пароль" type="password" id="password_conf" value={password_confirmation} onChange={e=>setPasCon(e.target.value)} errors={errors.password_confirmation}/>
 

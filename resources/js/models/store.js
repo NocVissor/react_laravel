@@ -5,6 +5,9 @@ class Store {
     makeAutoObservable(this)
   }
   user = null;
+  setUser(user){
+    this.user = user;
+  }
   code = defaultCode;
 }
 

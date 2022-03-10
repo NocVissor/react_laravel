@@ -35,18 +35,18 @@ export default (
             } />
 
             <Route path={routes.forgot} element={
-                <Auth No={()=>
+                // <Auth No={()=>
                     <Forgot/>
-                } Yes={()=>
-                    <Navigate to={routes.unAuth} />
-                } />
+                // } Yes={()=>
+                //     <Navigate to={routes.unAuth} />
+                // } />
             } />
             <Route path={routes.resend} element={
-                <Auth No={()=>
+                // <Auth No={()=>
                     <Resend/>
-                } Yes={()=>
-                    <Navigate to={routes.unAuth} />
-                } />
+                // } Yes={()=>
+                //     <Navigate to={routes.unAuth} />
+                // } />
             } />
 
         </React.Fragment>

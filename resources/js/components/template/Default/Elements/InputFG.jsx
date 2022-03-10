@@ -5,7 +5,10 @@ function InputFG(props){
         <FG
             {...props}
             input={
-                <input className="form-control" {...props} aria-describedby={props.id + ' - describedby'} />
+                <>
+                    <input className="form-control" {...props} aria-describedby={props.id + ' - describedby'} />
+                    {props.after}
+                </>
             }
         />
     );
@@ -15,7 +18,8 @@ InputFG.defaultProps = {
     value: null,
     type: 'text',
     onChange: ()=>false,
-    id: ''
+    id: '',
+    after: ''
 }
 
 export default InputFG;
