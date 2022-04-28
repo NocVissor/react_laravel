@@ -1,7 +1,7 @@
 import { toast } from 'react-toastify';
 
 export default class api{
-    static url = '';
+    //static url = '/api';
 
     static init(data) {
         api.url = data.url;
@@ -12,6 +12,7 @@ export default class api{
         var method = data.type?data.type:'get';
         var dataParams = data.data?data.data:{};
         var headers = data.headers?data.headers:{};
+        var cancelToken = data.cancel?data.cancel.token:false;
         if(!dataParams.csrf){
             dataParams.csrf = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
         }
@@ -19,9 +20,11 @@ export default class api{
             headers['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
         }
         dataParams.api = true;
+
+
         function error_handing(data){
             if(data.response) data = data.response;
-            if(typeof data.data.errors !== 'undefined'){
+            if(typeof data.data !== 'undefined' && typeof data.data.errors !== 'undefined'){
                 let errors = data.data.errors
                 if(errors.messageError){
                     toast.error(errors.messageError);
@@ -51,6 +54,7 @@ export default class api{
             var config = {
                 method,
                 headers,
+                cancelToken
             }
             if(method == 'post'){
                 config.data = dataParams;
@@ -73,11 +77,11 @@ export default class api{
     }
 
 
-    static post(url, data = {}, headers = {}){
-        return api.query({url, data, headers, type: 'post'});
+    static post(url, data = {}, headers = {}, cancel = false){
+        return api.query({url, data, headers, type: 'post', cancel});
     }
-    static get(url, data = {}, headers = {}){
-        return api.query({url, data, headers, type: 'get'});
+    static get(url, data = {}, headers = {}, cancel = false){
+        return api.query({url, data, headers, type: 'get', cancel});
     }
     static setCode(code){
         window.store.code = code;

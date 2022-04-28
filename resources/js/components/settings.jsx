@@ -25,9 +25,9 @@ export default observer(()=>{
 
     useEffect(()=>{
         window.add_init(()=>{
-            if(noAjax && typeof user !== 'undefined'){
-                noAjax = false;
-                parseUser(user);
+            if(serval.noAjax && typeof serval.user !== 'undefined'){
+                serval.noAjax = false;
+                parseUser(serval.user);
             }
             else{
                 window.api.get('/settings' ).then(response=>{

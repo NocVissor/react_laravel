@@ -5,11 +5,11 @@ export function add_init(action){
     if(ready) action();
 }
 export default function init(full=false){
-    window.api.post('/init', {time}).then((response)=>{
+    window.api.post('/init', {time:serval.time}).then((response)=>{
         if(typeof response.user !== 'undefined'){
             window.store.setUser(response.user);
             if(response.new_time - response.old_time > 10){
-                noAjax = false;
+                serval.noAjax = false;
             }
             ready = true;
             if(full){
@@ -17,6 +17,11 @@ export default function init(full=false){
                     val();
                 })
             }
+        }
+    }).catch((error)=>{
+        console.log(error);
+        if(error.status == 419){
+            window.location.reload();
         }
     });
 }

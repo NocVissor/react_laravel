@@ -17,9 +17,9 @@ export default class Example extends React.Component {
     componentDidMount(){
         window.add_init(()=>{
 
-            if(noAjax && typeof test !== 'undefined'){
-                noAjax = false;
-                this.setState({test: test});
+            if(serval.noAjax && typeof serval.test !== 'undefined'){
+                serval.noAjax = false;
+                this.setState({test: serval.test});
             }
             else{
                 this.updateAxios();

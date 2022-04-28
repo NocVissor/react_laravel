@@ -33,10 +33,10 @@ export default ()=>{
     useEffect(()=>{
         window.first = true;
         window.add_init(()=>{
-            if(noAjax && typeof count !== 'undefined' && typeof users !== 'undefined'){
-                noAjax = false;
-                setUsers(users);
-                setCount(count);
+            if(serval.noAjax && typeof serval.count !== 'undefined' && typeof serval.users !== 'undefined'){
+                serval.noAjax = false;
+                setUsers(serval.users);
+                setCount(serval.count);
             }
             else{
                 updateCount();

@@ -29,7 +29,7 @@ class Http{
             http_response_code(self::$code);
 
             \JavaScript::put(
-                self::$body
+                ['serval'=>self::$body]
             );
 
             return response()
