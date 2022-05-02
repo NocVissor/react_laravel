@@ -23,6 +23,7 @@ export default class api{
 
 
         function error_handing(data){
+            console.log(data);
             if(data.response) data = data.response;
             if(typeof data.data !== 'undefined' && typeof data.data.errors !== 'undefined'){
                 let errors = data.data.errors
@@ -32,13 +33,17 @@ export default class api{
                 if(data.status == 404){
                     api.setCode(404);
                 }
+                if(data.status == 419){
+                    window.location.reload();
+                }
                 send_handing(data.data);
+                errors.status = data.status;
                 return errors;
             }
             else{
                 console.log('unprocessed error');
-                console.log(data.data);
-                return {};
+                console.log(data);
+                return data;
             }
         }
 

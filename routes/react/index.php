@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\WebSocket;
 
 
 use App\Http\Controllers\System\ReactController;
@@ -21,6 +22,8 @@ Route::post('/settings', [ProfileController::class, 'setSettings'])->middleware(
 Route::any('/example', [TestController::class, 'example']);
 //Route::any('/example2', [TestController::class, 'example2']);
 
+
+Route::any('/redis', [WebSocket::class, 'redis']);
 
 require base_path('routes/react/auth.php');
 require base_path('routes/react/admin.php');

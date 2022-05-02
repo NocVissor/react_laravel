@@ -1,6 +1,6 @@
 <?php
 namespace App\Services\Soft;
-
+use App\Services\Soft\Timing;
 class Http{
     static public $code = 200;
     static public $errors = [];
@@ -9,7 +9,9 @@ class Http{
 
 
     static public function check_ajax(){
-        return (isset(request()->all()['api']) && request()->all()['api']);
+        $url = $_SERVER['REQUEST_URI'];
+        $parts = explode('/', $url);
+        return (isset($parts[1]) && $parts[1] == 'api');
     }
 
     static public function response(){
