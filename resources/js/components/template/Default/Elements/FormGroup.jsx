@@ -1,15 +1,21 @@
 import React from 'react';
 function FormGroup(props) {
     let describedby = props.id + ' - describedby';
+    const label = (
+    <label htmlFor={props.id} className="form-label">
+        {props.label}
+    </label>);
     return (
         <div className="from-group">
-            <label htmlFor={props.id}>
-                {props.label}
-            </label>
-            {props.input}
+
+            
             {props.help ?
-            <small id={describedby} className="form-text text-muted">{props.help}</small>
-            :false}
+                <div className="d-flex justify-content-between">
+                    {label}
+                    {props.help}
+                </div>
+            :label}
+            {props.input}
 
             {
                 props.errors.map((error, i)=>(
