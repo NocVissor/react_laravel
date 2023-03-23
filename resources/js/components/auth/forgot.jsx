@@ -13,21 +13,19 @@ export default (props)=>{
         return (
             <Template mode="forgot">
                 <>
-                    <form>
-                        <Input label="Email" id="email" value={email} onChange={e=>setEmail(e.target.value)} errors={errors.email}/>
-                        <button type="button" className="btn btn-primary d-block w-100" onClick={()=>{
-                            window.api.post('/password/forgot', {email})
-                                .then(response=>{
-                                    toast.success('Ссылка для сброса пароля отправлена на вашу почту');
-                                    setRedir(true);
-                                })
-                                .catch(errors=>{
-                                    setErrors(errors);
-                                });
-                        }}>
-                            Send reset link
-                        </button>
-                    </form>
+                    <Input label="email" id="email" value={email} onChange={e=>setEmail(e.target.value)} errors={errors.email}/>
+                    <button type="button" className="btn btn-success" onClick={()=>{
+                        window.api.post('/password/forgot', {email})
+                            .then(response=>{
+                                toast.success('Ссылка для сброса пароля отправлена на вашу почту');
+                                setRedir(true);
+                            })
+                            .catch(errors=>{
+                                setErrors(errors);
+                            });
+                    }}>
+                        Восстановить
+                    </button>
                 </>
             </Template>
 
