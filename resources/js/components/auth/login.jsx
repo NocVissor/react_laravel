@@ -12,26 +12,22 @@ export default (props)=>{
     const [remember, setRemember] = useState('');
     const [errors, setErrors] = useState({});
     return (
-        <Template mode="login">
-            <>
-                <Input label="Email" id="email" value={email} onChange={e=>setEmail(e.target.value)} errors={errors.email}/>
-
-                <Input label="Password" type="password" id="password" value={password} onChange={e=>setPassword(e.target.value)} errors={errors.password} help={
-                    <NavLink to={routes.forgot}><small>Forgot password?</small></NavLink>
-                }/>
-                <Checkbox label="Remember Me" checked={remember} onChange={e=>{setRemember(e.target.checked)}}/>
-                <button type="button" className="btn btn-primary d-block w-100" onClick={()=>{
-                    window.api.post('/login', {email, password})
-                        .then(response=>{
-                            init();
-                        })
-                        .catch(errors=>{
-                            setErrors(errors);
-                        });
-                }}>
-                    Sign in
-                </button>
-            </>
+        <Template >
+            <Input label="email" id="email" value={email} onChange={e=>setEmail(e.target.value)} errors={errors.email}/>
+            <Input label="пароль" type="password" id="password" value={password} onChange={e=>setPassword(e.target.value)} errors={errors.password} help={
+                <NavLink to={routes.forgot}>Восстановить пароль</NavLink>
+            }/>
+            <button type="button" className="btn btn-success" onClick={()=>{
+                window.api.post('/login', {email, password})
+                    .then(response=>{
+                        init();
+                    })
+                    .catch(errors=>{
+                        setErrors(errors);
+                    });
+            }}>
+                Войти
+            </button>
         </Template>
     )
 }

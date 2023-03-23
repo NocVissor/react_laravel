@@ -5,7 +5,7 @@ export function add_init(action){
     if(ready) action();
 }
 export default function init(full=false){
-
+    let time = typeof serval.time  !== 'undefined' ? serval.time : false;
     window.api.get('/init', {time}).then((response)=>{
 
         if(typeof response.user !== 'undefined'){

@@ -14,30 +14,21 @@ export default (props)=>{
     const [agreeER, setAgreeER] = useState([]);
     return (
         <Template mode="register">
-            <form>
-                <Input label="Email" id="email" value={email} onChange={e=>setEmail(e.target.value)} errors={errors.email}/>
-                <Input label="Username" id="name" value={name} onChange={e=>setName(e.target.value)} errors={errors.name}/>
-                <Input label="Password" type="password" id="password" value={password} onChange={e=>setPassword(e.target.value)} errors={errors.password}/>
-                <Input label="Repeat password" type="password" id="password_conf" value={password_confirmation} onChange={e=>setPasCon(e.target.value)} errors={errors.password_confirmation}/>
-                <Checkbox error_show={false} errors={agreeER} label={<>I agree to<a className="ms-25" href="/" onClick={e=>e.preventDefault()}>privacy policy &amp; terms</a></>} checked={agree} onChange={e=>{setAgree(e.target.checked)}}/>
-                <button type="button" className="btn btn-primary d-block w-100" onClick={()=>{
-                    if(agree){
-                        setAgreeER([]);
-                        window.api.post('/register', {email, password, name, password_confirmation})
-                        .then(response=>{
-                            init();
-                        })
-                        .catch(errors=>{
-                            setErrors(errors);
-                        });
-                    }
-                    else{
-                        setAgreeER(['required']);
-                    }
-                }}>
-                    Sign up
-                </button>
-            </form>
+            <Input label="email" id="email" value={email} onChange={e=>setEmail(e.target.value)} errors={errors.email}/>
+            <Input label="Логин" id="name" value={name} onChange={e=>setName(e.target.value)} errors={errors.name}/>
+            <Input label="пароль" type="password" id="password" value={password} onChange={e=>setPassword(e.target.value)} errors={errors.password}/>
+            <Input label="Повтроите пароль" type="password" id="password_conf" value={password_confirmation} onChange={e=>setPasCon(e.target.value)} errors={errors.password_confirmation}/>
+            <button type="button" className="btn btn-success" onClick={()=>{
+                window.api.post('/register', {email, password, name, password_confirmation})
+                    .then(response=>{
+                        init();
+                    })
+                    .catch(errors=>{
+                        setErrors(errors);
+                    });
+            }}>
+                Регистрация
+            </button>
         </Template>
     )
 }

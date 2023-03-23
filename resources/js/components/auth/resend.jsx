@@ -19,27 +19,23 @@ export default (props)=>{
 
     if(!redir){
         return (
-            <Cart
-            header={'Восстановление пароля'}
-            body={
-                <form>
-                    <Input label="пароль" type="password" id="password" value={password} onChange={e=>setPassword(e.target.value)} errors={errors.password}/>
-                    <Input label="Повтроите пароль" type="password" id="password_conf" value={password_confirmation} onChange={e=>setPasCon(e.target.value)} errors={errors.password_confirmation}/>
+            <Template mode="register">
+                <Input label="пароль" type="password" id="password" value={password} onChange={e=>setPassword(e.target.value)} errors={errors.password}/>
+                <Input label="Повтроите пароль" type="password" id="password_conf" value={password_confirmation} onChange={e=>setPasCon(e.target.value)} errors={errors.password_confirmation}/>
 
-                    <button type="button" className="btn btn-success" onClick={()=>{
-                        window.api.post('/password/resend', {password, password_confirmation, token, email})
-                            .then(response=>{
-                                toast.success('Пароль успешно сброшен!');
-                                setRedir(true);
-                            })
-                            .catch(errors=>{
-                                setErrors(errors);
-                            });
-                    }}>
-                        Восстановить
-                    </button>
-                </form>
-            }/>
+                <button type="button" className="btn btn-success" onClick={()=>{
+                    window.api.post('/password/resend', {password, password_confirmation, token, email})
+                        .then(response=>{
+                            toast.success('Пароль успешно сброшен!');
+                            setRedir(true);
+                        })
+                        .catch(errors=>{
+                            setErrors(errors);
+                        });
+                }}>
+                    Восстановить
+                </button>
+            </Template>
         )
     } else{
         return (<Navigate to={routes.home}/>);
