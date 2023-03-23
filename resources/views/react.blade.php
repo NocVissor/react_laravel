@@ -14,6 +14,10 @@
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
 
+        <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600"
+        />
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 

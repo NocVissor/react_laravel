@@ -46,9 +46,7 @@ export default observer((props)=>{
         <BrowserRouter history={history}>
             <RouterHandler/>
 
-            <Template>
-                {Content}
-            </Template>
+            {Content}
         </BrowserRouter>
     )
 });

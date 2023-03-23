@@ -14,7 +14,7 @@ export default observer(()=>{
                 <div className="row">
                     <div className="col">
                         <NavLink to={routes.home}>Главная</NavLink>
-                        <NavLink to={routes.example}>Ex</NavLink>
+
                         <Admin Yes={()=>
                             <NavLink to={routes.admin.users}>Пользователи</NavLink>
                         }/>

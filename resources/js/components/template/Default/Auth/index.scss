@@ -1,0 +1,54 @@
+html{
+    font-size: 14px;
+    height: 100%;
+    letter-spacing: 0.01rem;
+}
+a {
+    text-decoration: none;
+}
+.auth-wrapper.auth-cover .brand-logo {
+    left: 2em;
+}
+.ms-1 {
+    margin-left: 1rem !important;
+}
+
+.logo-img{
+    height: 28px;
+}
+
+.ms-25 {
+    margin-left: 0.25rem !important;
+}
+
+.from-group, .form-check{
+    .form-check-input{
+        background-size: contain !important;
+    }
+    input:focus + span{
+        border-color: #7367f0;
+    }
+    input.is-invalid + span{
+        border-color: #dc3545;
+    }
+}
+.auth-form{
+    .from-group, .form-check{
+        margin-bottom: 14px;
+    }
+    .btn.btn-primary{
+        &:hover{
+            box-shadow: 0 8px 25px -8px #7367f0;
+        }
+    }
+}
+.forgot-back{
+    display: flex;
+    justify-content: center;
+    svg{
+        margin-right: 4.5px;
+        margin-top: auto;
+        margin-bottom: 6px;
+        font-size: 10px;
+    }
+}
