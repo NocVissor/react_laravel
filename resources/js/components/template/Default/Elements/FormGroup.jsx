@@ -1,4 +1,4 @@
-import React from 'React';
+import React from 'react';
 function FormGroup(props) {
     let describedby = props.id + ' - describedby';
     return (

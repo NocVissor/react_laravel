@@ -2,7 +2,6 @@ import admin from './routes/admin';
 
 export default {
     example: '/example',
-    example2: '/example2',
     login: '/login',
     register: '/register',
     settings: '/settings',

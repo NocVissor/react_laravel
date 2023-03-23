@@ -13,6 +13,7 @@ class Init{
             'user' => false,
             'old_time' => $old_time,
             'new_time' => $new_time,
+            'token' =>  csrf_token(),
         ];
         $user = Auth::user();
         if($user){

@@ -2,7 +2,7 @@ import { toast } from 'react-toastify';
 
 export default class api{
     static url = '';
-
+    static token = false;
     static init(data) {
         api.url = data.url;
     }
@@ -12,12 +12,19 @@ export default class api{
         var method = data.type?data.type:'get';
         var dataParams = data.data?data.data:{};
         var headers = data.headers?data.headers:{};
-        if(!dataParams.csrf){
-            dataParams.csrf = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        if(!api.token && !dataParams.csrf){
+            api.token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
         }
-        if(!headers['X-CSRF-TOKEN']){
-            headers['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        if(!api.token && !headers['X-CSRF-TOKEN']){
+            api.token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
         }
+        if(api.token){
+            dataParams.csrf = api.token;
+            headers['X-CSRF-TOKEN'] = api.token;
+        }
+
+
+
         dataParams.api = true;
         function error_handing(data){
             if(data.response) data = data.response;
@@ -35,7 +42,10 @@ export default class api{
             else{
                 console.log('unprocessed error');
                 console.log(data.data);
-                return {};
+                if(data.status == 419){
+                    // window.location.replace('/?code=419');
+                }
+                return data;
             }
         }
 

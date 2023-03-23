@@ -8,7 +8,7 @@ use App\Http\Controllers\TestController;
 
 
 use App\Http\Controllers\System\ReactController;
-Route::post('/init', [ReactController::class, 'init']);
+Route::any('/init', [ReactController::class, 'init']);
 
 Route::get('/', [HomeController::class, 'home']);
 
