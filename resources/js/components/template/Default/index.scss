@@ -29,4 +29,19 @@ header{
     label {
         margin-bottom: .5rem;
     }
+    .inp_help{
+        display: flex;
+        justify-content: end;
+        position: relative;
+        height: 0px;
+        top: -32px;
+        right: 13px;
+        a{
+            height: fit-content;
+        }
+    }
+}
+.badge-success{
+    color: #fff;
+    background-color: #28a745;
 }

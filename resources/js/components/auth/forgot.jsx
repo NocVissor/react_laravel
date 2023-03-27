@@ -11,7 +11,7 @@ export default (props)=>{
     const [errors, setErrors] = useState({});
     if(!redir){
         return (
-            <Template mode="forgot">
+            <Template name="Восстановление пароля">
                 <>
                     <Input label="email" id="email" value={email} onChange={e=>setEmail(e.target.value)} errors={errors.email}/>
                     <button type="button" className="btn btn-success" onClick={()=>{

@@ -21,7 +21,8 @@ class Init{
                 'id' => $user->id,
                 'name' => $user->name,
                 'role' => $user->role,
-                'verify' => $user->hasVerifiedEmail()
+                'verify_phone' => (bool)$user->phone_verified_at,
+                'verify_email' => (bool)$user->email_verified_at
             ];
         }
 

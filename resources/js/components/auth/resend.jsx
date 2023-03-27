@@ -4,6 +4,7 @@ import Input from '../template/Default/Elements/InputFG.jsx';
 import {Navigate} from "react-router-dom";
 import routes from "../../router/routes";
 import { toast } from 'react-toastify';
+import Template from '../template/Default/Auth/index';
 
 export default (props)=>{
     const [password, setPassword] = useState('');
@@ -19,7 +20,7 @@ export default (props)=>{
 
     if(!redir){
         return (
-            <Template mode="register">
+            <Template name="Введите новый пароль">
                 <Input label="пароль" type="password" id="password" value={password} onChange={e=>setPassword(e.target.value)} errors={errors.password}/>
                 <Input label="Повтроите пароль" type="password" id="password_conf" value={password_confirmation} onChange={e=>setPasCon(e.target.value)} errors={errors.password_confirmation}/>
 

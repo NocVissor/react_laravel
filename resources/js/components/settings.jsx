@@ -43,7 +43,7 @@ export default observer(()=>{
         body={
             <form>
                 <Input label="email" id="email" value={email} onChange={e=>setEmail(e.target.value)} errors={errors.email}/>
-                { !storeUser.verify && <button type="button" className="btn btn-success" onClick={()=>{
+                { !storeUser.verify_email && <button type="button" className="btn btn-success" onClick={()=>{
                     window.api.post('/email/verify/resend')
                         .then(response=>{
                             toast.success('Письмо отправлено!');

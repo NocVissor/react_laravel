@@ -15,7 +15,7 @@ export default class Default extends React.Component{
     render(){
         return(
             <Cart
-            header={'Вход'}
+            header={this.props.name}
             body={
                 <form>
                     {this.props.children}

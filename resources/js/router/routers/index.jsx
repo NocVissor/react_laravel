@@ -15,7 +15,12 @@ export default ()=>{
             <Routes>
                 <Route path={routes.example} element={ <Example id=""/> } />
                 <Route path={routes.home} element={
-                    <Home/>
+                    // <Home/>
+                    <Auth Yes={()=>
+                        <Home/>
+                    } No={()=>
+                        <Navigate to={routes.login} />
+                    } />
                 } />
                 <Route path={routes.settings} element={
                     <Auth Yes={()=>

@@ -1,10 +1,13 @@
 import React from 'react';
 function FormGroup(props) {
     let describedby = props.id + ' - describedby';
-    const label = (
-    <label htmlFor={props.id} className="form-label">
-        {props.label}
-    </label>);
+    let label = <></>;
+    if(props.label){
+        label = (
+        <label htmlFor={props.id} className="form-label">
+            {props.label}
+        </label>);
+    }
     return (
         <div className="from-group">
 
@@ -16,7 +19,7 @@ function FormGroup(props) {
                 </div>
             :label}
             {props.input}
-
+            <div className="inp_help">{props.inp_help}</div>
             {
                 props.errors.map((error, i)=>(
                     <React.Fragment key={error}>
@@ -33,7 +36,8 @@ FormGroup.defaultProps = {
     label: '',
     id: '',
     input: <></>,
-    help: false,
+    help: null,
+    inp_help: null,
     errors: []
 }
 

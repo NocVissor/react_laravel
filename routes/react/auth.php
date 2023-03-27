@@ -8,6 +8,8 @@ Route::post('/login', [AuthController::class, 'login']);
 
 Route::get('/register', function(){ return Http::success(); });
 Route::post('/register', [AuthController::class, 'register']);
+Route::post('/confirm-phone', [AuthController::class, 'confirmPhone']);
+Route::post('/send-phone-code', [AuthController::class, 'SendPhoneCode']);
 Route::get('/logout', [AuthController::class, 'logout']);
 
 Route::get('/password/forgot', function(){ return Http::success(); });

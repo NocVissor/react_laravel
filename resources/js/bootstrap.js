@@ -66,6 +66,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 import api from './modules/api';
 
